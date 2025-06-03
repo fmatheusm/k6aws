@@ -36,7 +36,7 @@ export function setup() {
         password: "12345678",
     });
 
-    const token = http.post(`${__ENV.URL}/api/users/token/login`, requestBody);
+    const token = http.post(`https://quickpizza.grafana.com/api/users/token/login`, requestBody);
     return {
         headers: {
             'Authorization': `Bearer ${token.json('token')}`,
@@ -47,7 +47,7 @@ export function setup() {
 }
 
 export default function (headers) {
-    const res = http.get(__ENV.URL + '/api/ratings', headers);
+    const res = http.get('https://quickpizza.grafana.com/api/ratings', headers);
     check(res, {
         'lista com sucesso': r => r.status === 200,
     });
