@@ -1,5 +1,7 @@
 name: K6 load test
 on: [push]
+permissions:
+  contents: write
 jobs:
   k6LoadTeste:
     runs-on: ubuntu-latest
@@ -29,3 +31,10 @@ jobs:
         with:
           name: relatorio de testes de performance
           path: report
+
+      - name: step 6 - publish report
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: report
