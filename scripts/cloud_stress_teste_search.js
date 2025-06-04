@@ -12,6 +12,7 @@ Obs: Nesses testes serão utilizados scenarios
 
 import { check, sleep } from 'k6';
 import http from 'k6/http';
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 
 export const options = {
     ext: {
@@ -52,4 +53,10 @@ export default function (headers) {
         'lista com sucesso': r => r.status === 200,
     });
     sleep(1);
+}
+
+export function handleSummary(data) {
+    return {
+        "index.html": htmlReport(data),
+    };
 }

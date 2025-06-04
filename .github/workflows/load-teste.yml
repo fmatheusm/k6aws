@@ -4,10 +4,10 @@ jobs:
   k6LoadTeste:
     runs-on: ubuntu-latest
     steps:
-      - name: step1 - checkout
+      - name: step 1 - checkout
         uses: actions/checkout@v4
 
-      - name:
+      - name: step 2 - install k6
         run: |
           sudo apt-get update
           sudo apt-get install -y ca-certificates gnupg2
@@ -16,7 +16,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y k6
 
-      - name: step 2 - run k6 load test
+      - name: step 3 - run k6 load test
         uses: grafana/run-k6-action@v1
         with:
           path: scripts/cloud_stress_teste_search.js
+
+      - name: step 4 - create folder for report
+        run: ls & mkdir report & mv index.html report
+
+      - name: step 5 - upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio de testes de performance
+          path: report
