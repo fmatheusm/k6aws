@@ -10,4 +10,4 @@ jobs:
       - name: step 2 - run k6 load test
         uses: grafana/run-k6-action@v1
         with:
-          filename: scripts/cloud_stress_teste_search.js
+          path: scripts/cloud_stress_teste_search.js
