@@ -1,0 +1,13 @@
+name: K6 load test
+on: [push]
+jobs:
+  build: K6 load test
+  runs-on: ubuntu-latest
+  steps:
+    - name: step1 - checkout
+      uses: actions/checkout@v4
+
+    - name: step 2 - run k6 load test
+      uses: grafana/run-k6-action@v1
+      with:
+        filename: scripts/cloud_stress_teste_search.js
