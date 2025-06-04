@@ -7,6 +7,15 @@ jobs:
       - name: step1 - checkout
         uses: actions/checkout@v4
 
+      - name:
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates gnupg2
+          sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+          echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install -y k6
+
       - name: step 2 - run k6 load test
         uses: grafana/run-k6-action@v1
         with:
